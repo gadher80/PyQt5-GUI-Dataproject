@@ -88,6 +88,8 @@ class UI(QtWidgets.QDialog):
         self.openFileButton.setDisabled(True)
         self.EditButton.setDisabled(True)
 
+        #add buttons
+
 
 
         self.show()
