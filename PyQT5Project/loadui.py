@@ -1,3 +1,4 @@
+from msilib.schema import File
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtWidgets import QFileDialog, QMessageBox,QHBoxLayout, QWidget
 import sys
@@ -7,7 +8,8 @@ from pathlib import Path
 import validators
 from validators import ValidationFailure
 import requests
-
+import csv
+import sqlite3
 #add libraries
 
 DataSets = {}
@@ -166,6 +168,20 @@ class UI(QtWidgets.QDialog):
         else:         
             
             self.loaddata()
+            connection = sqlite3.connect('renewable.db')
+            cursor = connection.cursor()
+            create_table = '''CREATE TABLE solar(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                Name TEXT NOT NULL,
+                File INTEGER NOT NULL,
+                Comments TEXT NOT NULL);
+                '''
+
+            csvFile  =  csv.reader(DataSets["Location"][0])
+            name = self.datasetTextEdit.toPlainText()
+            comment = self.commentTextEdit.toPlainText()
+            File = self.toPlainText()
+            insert_records = f"INSERT INTO person (name, File, Comments) VALUES(self.dataTextEdit.to, ?)"
             self.locationLabel.clear()
             self.datasetTextEdit.clear()
             self.urlTextEdit.clear()
@@ -189,10 +205,6 @@ class UI(QtWidgets.QDialog):
             self.deleteButton.setDisabled(True)
             self.openFileButton.setDisabled(True)
             self.EditButton.setDisabled(True)
-
-
-
-
 
 
     def loaddata(self):
