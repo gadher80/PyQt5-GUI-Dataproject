@@ -15,6 +15,12 @@ from datetime import datetime
 DataSets = {}
 urlData = {}
 addedDatabases = []
+addedRows ={}
+
+connection = sqlite3.connect('data.db')
+cursor = connection.cursor()
+print(addedRows.values())
+
 
 
 class UI(QtWidgets.QDialog):
@@ -24,6 +30,16 @@ class UI(QtWidgets.QDialog):
         uic.loadUi("DataMiner.ui", self)
         layout = QtWidgets.QVBoxLayout()
         self.setLayout(layout)
+        self.DataTableWidget = self.findChild(QtWidgets.QTableWidget, "DataTableWidget")
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM addedData")
+        records = cursor.fetchall()
+        for row_number, row_data in enumerate(records):
+            self.DataTableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.DataTableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
+        self.DataTableWidget.resizeColumnsToContents()
 
         self.datasetTextEdit = self.findChild(QtWidgets.QTextEdit,"datasetTextEdit")
         self.colNameslist = self.findChild(QtWidgets.QListWidget,"colNameslist")               
@@ -31,7 +47,7 @@ class UI(QtWidgets.QDialog):
         self.locationLabel = self.findChild(QtWidgets.QLabel,"locationLabel")
         self.urlTextEdit = self.findChild(QtWidgets.QTextEdit,"urlTextEdit")
         self.datasetLabel = self.findChild(QtWidgets.QLabel,"datasetLabel")
-        self.DataTableWidget = self.findChild(QtWidgets.QTableWidget, "DataTableWidget")
+        
         self.EnergyComboList = self.findChild(QtWidgets.QComboBox, "EnergyComboList")
         self.colTextEdit = self.findChild(QtWidgets.QTextEdit, "colTextEdit")
         self.EnergycomboBox = self.findChild(QtWidgets.QComboBox, "EnergycomboBox")
@@ -43,9 +59,6 @@ class UI(QtWidgets.QDialog):
         self.databaseComboBox = self.findChild(QtWidgets.QComboBox, "databaseComboBox")
         self.commentTextEdit.setPlaceholderText("Enter your Comments")
         
-        
-
-
         self.insertButton = self.findChild(QtWidgets.QPushButton, "insertButton")
         self.deleteButton = self.findChild(QtWidgets.QPushButton, "deleteButton")
         self.EditButton = self.findChild(QtWidgets.QPushButton, "EditButton")
@@ -60,11 +73,8 @@ class UI(QtWidgets.QDialog):
         self.openFileButton.clicked.connect(self.openFile)
         self.ResetButton.clicked.connect(self.reset)
         self.databaseButton.clicked.connect(self.insertDatabase)
-        self.closeButton.clicked.connect(self.close)
+        self.closeButton.clicked.connect(self.closeEvent)
         
-
-        
-
         self.insertButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
                                         "font-size: 10px;" "font-weight: bold;" 
                                         "border-radius: 4px;" "border: 1px solid #009DE1;" 
@@ -99,18 +109,20 @@ class UI(QtWidgets.QDialog):
         self.closeButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
                                         "font-size: 10px;" "font-weight: bold;" 
                                         "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")                                
+                                        "opacity: 0.8;")
 
-
-        self.deleteButton.setDisabled(True)
-        self.openFileButton.setDisabled(True)
-        self.EditButton.setDisabled(True)
-        self.submitButton.setDisabled(True)
-
-       
+        if self.DataTableWidget.rowCount() > 0:
+            self.deleteButton.setDisabled(False)
+            self.openFileButton.setDisabled(False)
+            self.EditButton.setDisabled(False)
+            self.submitButton.setDisabled(False)    
+         
         self.show()
 
-
+    def closeEvent(self):
+        addedDataframe = pd.DataFrame(list(addedRows.values()), columns = ['Name of Dataset', 'Energy Type', 'File Type', 'Comments', 'Created Date'])   
+        addedDataframe.to_sql('addedData', connection, if_exists='replace', index = False)
+        sys.exit()
 
 
     def openFile(self):
@@ -161,8 +173,6 @@ class UI(QtWidgets.QDialog):
         self.databaseComboBox.setCurrentText(os.path.basename(dataBasename[0]))
         
         
-
-        
     def reset(self):
         message = QtWidgets.QMessageBox()
         message.setWindowTitle("Reset")
@@ -175,7 +185,6 @@ class UI(QtWidgets.QDialog):
             self.colNameslist.clear()
             self.colTextEdit.clear()
         
-
     def sumbit(self):
 
         #check if given URL is existing
@@ -255,8 +264,9 @@ class UI(QtWidgets.QDialog):
                     "URL": self.urlTextEdit.toPlainText(),
                     "Created Date": now.strftime("%Y-%m-%d %H:%M:%S"),
                     }]
-
+        
         row = self.DataTableWidget.rowCount()
+        
         self.DataTableWidget.setRowCount(row + 1 ) 
         
         for data in Data:
@@ -265,11 +275,9 @@ class UI(QtWidgets.QDialog):
             self.DataTableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(data["File Type"]))
             self.DataTableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem(data["Comments"]))
             self.DataTableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem(data["Created Date"]))
+            addedRows[row] =[data["Name of Dataset"],data["Energy Type"],data["File Type"],data["Comments"],data["Created Date"]]
             DataSets[row] = [data["Location"], data["URL"], df.columns.values.tolist(), self.databaseComboBox.currentText(), data["Energy Type"], data["File Type"]]
             Data.clear()
-        
-        
-    
 
 app = QtWidgets.QApplication(sys.argv)
 UIWindow = UI()
