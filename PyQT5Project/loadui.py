@@ -7,6 +7,8 @@ from pathlib import Path
 import validators
 from validators import ValidationFailure
 import requests
+import csv, sqlite3
+import pyquark
 
 #add libraries
 
@@ -49,21 +51,19 @@ class UI(QtWidgets.QDialog):
         self.EditButton = self.findChild(QtWidgets.QPushButton, "EditButton")
         self.openFileButton = self.findChild(QtWidgets.QPushButton, "openFileButton")
         self.ResetButton = self.findChild(QtWidgets.QPushButton, "ResetButton")
+        
+        self.insertButton.clicked.connect(self.insert)
+        self.submitButton.clicked.connect(self.sumbit)
+        self.EditButton.clicked.connect(self.editData)
+        self.deleteButton.clicked.connect(self.deleteRecord)
+        self.openFileButton.clicked.connect(self.openFile)
+        self.ResetButton.clicked.connect(self.reset)
 
         self.insertButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
                                         "font-size: 10px;" "font-weight: bold;" 
                                         "border-radius: 4px;" "border: 1px solid #009DE1;" 
                                         "opacity: 0.8;")
 
-        
-        
-        self.insertButton.clicked.connect(self.clicker)
-        self.submitButton.clicked.connect(self.sumbit)
-        #self.submitButton.setDisabled(True)
-        self.EditButton.clicked.connect(self.editData)
-        self.deleteButton.clicked.connect(self.deleteRecord)
-        self.openFileButton.clicked.connect(self.openFile)
-        self.ResetButton.clicked.connect(self.reset)
         self.ResetButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
                                         "font-size: 10px;" "font-weight: bold;" 
                                         "border-radius: 4px;" "border: 1px solid #009DE1;" 
@@ -84,37 +84,45 @@ class UI(QtWidgets.QDialog):
                                         "font-size: 10px;" "font-weight: bold;" 
                                         "border-radius: 4px;" "border: 1px solid #009DE1;" 
                                         "opacity: 0.8;")
+
         self.deleteButton.setDisabled(True)
         self.openFileButton.setDisabled(True)
         self.EditButton.setDisabled(True)
-
-        #add buttons
-
-
-
+        self.submitButton.setDisabled(True)
         self.show()
 
     def openFile(self):
         openRow = self.DataTableWidget.currentRow()
-        selectedPath = DataSets[openRow][0]
-        print(selectedPath)
-        os.startfile(selectedPath)
+        selectedPath = fname[0]
+        pyquark.filestart(selectedPath)
+
+        #print(selectedPath)
+        #os.startfile(selectedPath)
 
     def deleteRecord(self):
             message = QtWidgets.QMessageBox()
             message.setWindowTitle("Delete")
             message = QtWidgets.QMessageBox.question(self, "Delete", "Are you sure you want to delete?", QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
             if message == QtWidgets.QMessageBox.Yes:
+                connection = sqlite3.connect('renewable.db')
+                cursor = connection.cursor()
+                tobeDeleted = str(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 0).text())
+                print(tobeDeleted)
+                cursor.execute("DROP TABLE" + ' '+ tobeDeleted)
+                connection.commit()
                 self.DataTableWidget.removeRow(self.DataTableWidget.currentRow())
 
-           
-            
 
-    def clicker(self):
+	
 
+
+    def insert(self):
+        self.submitButton.setDisabled(False)
+        global fname
         fname = QFileDialog.getOpenFileName(self, "Choose CSV", "","All files(*);;(*.csv);;(*.json);;(*.xlsm);;(*.xlsx)")
 
         if fname: 
+            print(fname[0])
             self.locationLabel.setText(fname[0])
             self.datasetTextEdit.setPlainText(Path(fname[0]).stem)
             fileExtension = os.path.splitext(fname[0])[1].replace(".","").upper() 
@@ -166,6 +174,11 @@ class UI(QtWidgets.QDialog):
         else:         
             
             self.loaddata()
+            connection = sqlite3.connect('renewable.db')
+            cursor = connection.cursor()
+            users = pd.read_csv(fname[0], encoding= 'unicode_escape')
+            # write the data to a sqlite table  
+            users.to_sql(f'{self.datasetTextEdit.toPlainText()}', connection, if_exists='append', index = False)
             self.locationLabel.clear()
             self.datasetTextEdit.clear()
             self.urlTextEdit.clear()
@@ -183,16 +196,19 @@ class UI(QtWidgets.QDialog):
         self.locationLabel.setText(DataSets[self.DataTableWidget.currentRow()][0])
         self.commentTextEdit.setText(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 3).text())
         self.colNameslist.insertItems(0, DataSets[self.DataTableWidget.currentRow()][2])
+        connection = sqlite3.connect('renewable.db')
+        cursor = connection.cursor()
+        tobeDeleted = str(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 0).text())
+        print(tobeDeleted)
+        cursor.execute("DROP TABLE" + ' '+ tobeDeleted)
+        connection.commit()
+        self.colTextEdit.setPlainText(str(len(DataSets[self.DataTableWidget.currentRow()][2])))
         self.DataTableWidget.removeRow(self.DataTableWidget.currentRow())
-        self.colTextEdit.setText(str(len(DataSets[self.DataTableWidget.currentRow()][2])))
+        
         if self.DataTableWidget.rowCount() == 0:
             self.deleteButton.setDisabled(True)
             self.openFileButton.setDisabled(True)
             self.EditButton.setDisabled(True)
-
-
-
-
 
 
     def loaddata(self):
