@@ -105,9 +105,11 @@ class UI(QtWidgets.QDialog):
             message = QtWidgets.QMessageBox.question(self, "Delete", "Are you sure you want to delete?", QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
             if message == QtWidgets.QMessageBox.Yes:
                 self.DataTableWidget.removeRow(self.DataTableWidget.currentRow())
+                connection = sqlite3.connect('renewable.db')
+                cursor = connection.cursor()
+                #drop a table
+                cursor.execute(f"DROP TABLE {self.datasetTextEdit.toPlainText()}")
 
-           
-            
 
     def insert(self):
         self.submitButton.setDisabled(False)
