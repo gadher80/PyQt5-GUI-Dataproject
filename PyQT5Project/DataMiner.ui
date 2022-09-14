@@ -2,22 +2,47 @@
 <ui version="4.0">
  <class>Dialog</class>
  <widget class="QDialog" name="Dialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1107</width>
-    <height>548</height>
+    <width>1135</width>
+    <height>535</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::TabFocus</enum>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::CustomContextMenu</enum>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Data Miner Tool</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -90,7 +115,7 @@
     <rect>
      <x>50</x>
      <y>120</y>
-     <width>101</width>
+     <width>81</width>
      <height>16</height>
     </rect>
    </property>
@@ -100,7 +125,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Name of Dataset</string>
+    <string>Name</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -126,7 +151,7 @@
     <rect>
      <x>50</x>
      <y>180</y>
-     <width>61</width>
+     <width>71</width>
      <height>16</height>
     </rect>
    </property>
@@ -142,10 +167,10 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>440</x>
      <y>220</y>
      <width>51</width>
-     <height>16</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
@@ -172,15 +197,15 @@
     </font>
    </property>
    <property name="text">
-    <string>Column names</string>
+    <string>Columns</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_7">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>440</x>
      <y>260</y>
-     <width>101</width>
+     <width>71</width>
      <height>16</height>
     </rect>
    </property>
@@ -267,7 +292,7 @@
     <rect>
      <x>640</x>
      <y>60</y>
-     <width>441</width>
+     <width>451</width>
      <height>361</height>
     </rect>
    </property>
@@ -309,6 +334,11 @@
      <string>Comments</string>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>Time</string>
+    </property>
+   </column>
   </widget>
   <widget class="QPushButton" name="submitButton">
    <property name="geometry">
@@ -346,8 +376,7 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);</string>
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 255, 0), stop:1 rgba(255, 255, 255, 255)); border-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string/>
@@ -362,8 +391,17 @@ background-color: rgb(255, 255, 255);</string>
      <height>21</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="styleSheet">
     <string notr="true">border-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="tabStopWidth">
+    <number>79</number>
    </property>
   </widget>
   <widget class="QTextEdit" name="urlTextEdit">
@@ -377,6 +415,9 @@ background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">border-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
   </widget>
   <widget class="QTextEdit" name="commentTextEdit">
@@ -429,7 +470,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QTextEdit" name="colTextEdit">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>540</x>
      <y>260</y>
      <width>71</width>
      <height>21</height>
@@ -438,11 +479,14 @@ background-color: rgb(255, 255, 255);</string>
    <property name="styleSheet">
     <string notr="true">border-color: rgb(255, 255, 255);</string>
    </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
   </widget>
   <widget class="QComboBox" name="EnergyComboList">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>540</x>
      <y>220</y>
      <width>69</width>
      <height>21</height>
@@ -469,10 +513,10 @@ background-color: rgb(255, 255, 255);</string>
     </property>
    </item>
   </widget>
-   <widget class="QPushButton" name="EditButton">
+  <widget class="QPushButton" name="EditButton">
    <property name="geometry">
     <rect>
-     <x>850</x>
+     <x>760</x>
      <y>460</y>
      <width>75</width>
      <height>23</height>
@@ -490,7 +534,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="deleteButton">
    <property name="geometry">
     <rect>
-     <x>930</x>
+     <x>840</x>
      <y>460</y>
      <width>75</width>
      <height>23</height>
@@ -508,7 +552,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="openFileButton">
    <property name="geometry">
     <rect>
-     <x>1010</x>
+     <x>920</x>
      <y>460</y>
      <width>75</width>
      <height>23</height>
@@ -521,6 +565,67 @@ background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Open</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="databaseButton">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>65</y>
+     <width>86</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Database</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="databaseComboBox">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>65</y>
+     <width>361</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>1000</x>
+     <y>460</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Close</string>
    </property>
   </widget>
  </widget>
