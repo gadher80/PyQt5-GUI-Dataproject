@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
-from PyQt5.QtWidgets import QFileDialog, QMessageBox,QHBoxLayout, QWidget
+from PyQt5.QtWidgets import QFileDialog, QMessageBox,QHBoxLayout, QWidget, QFrame
 import sys
 import pandas as pd
 import os,sys, subprocess
@@ -28,8 +28,10 @@ class UI(QtWidgets.QDialog):
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi("DataMiner.ui", self)
-        layout = QtWidgets.QVBoxLayout()
-        self.setLayout(layout)
+        #add background image to the window
+        #add background to the window
+
+
         self.DataTableWidget = self.findChild(QtWidgets.QTableWidget, "DataTableWidget")
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
@@ -40,6 +42,8 @@ class UI(QtWidgets.QDialog):
             for column_number, data in enumerate(row_data):
                 self.DataTableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
         self.DataTableWidget.resizeColumnsToContents()
+        self.frame = self.findChild(QtWidgets.QFrame, "frame")
+        #self.setStyleSheet("background-color: #000000;")
 
         self.datasetTextEdit = self.findChild(QtWidgets.QTextEdit,"datasetTextEdit")
         self.colNameslist = self.findChild(QtWidgets.QListWidget,"colNameslist")               
@@ -57,59 +61,76 @@ class UI(QtWidgets.QDialog):
         self.closeButton = self.findChild(QtWidgets.QPushButton, "closeButton")
         self.databaseButton = self.findChild(QtWidgets.QPushButton, "databaseButton")
         self.databaseComboBox = self.findChild(QtWidgets.QComboBox, "databaseComboBox")
+        self.databasecheckBox = self.findChild(QtWidgets.QCheckBox, "databasecheckBox")
+
+
+        
         self.commentTextEdit.setPlaceholderText("Enter your Comments")
+
+
         
         self.insertButton = self.findChild(QtWidgets.QPushButton, "insertButton")
         self.deleteButton = self.findChild(QtWidgets.QPushButton, "deleteButton")
         self.EditButton = self.findChild(QtWidgets.QPushButton, "EditButton")
         self.openFileButton = self.findChild(QtWidgets.QPushButton, "openFileButton")
         self.ResetButton = self.findChild(QtWidgets.QPushButton, "ResetButton")
+        self.mdiArea = self.findChild(QtWidgets.QMdiArea, "mdiArea")
 
         
         self.insertButton.clicked.connect(self.insertFile)
         self.submitButton.clicked.connect(self.sumbit)
         self.EditButton.clicked.connect(self.editData)
+        self.EditButton.setIcon(QtGui.QIcon('383148_edit_icon(1).png'))
+        self.EditButton.setIconSize(QtCore.QSize(20,20 ))
+
         self.deleteButton.clicked.connect(self.deleteRecord)
+        self.deleteButton.setIcon(QtGui.QIcon('3669361_delete_ic_icon.png'))
+        self.deleteButton.setIconSize(QtCore.QSize(20,20 ))
+
         self.openFileButton.clicked.connect(self.openFile)
+        self.openFileButton.setIcon(QtGui.QIcon('5925643_file_folder_open_icon.png'))
+        self.openFileButton.setIconSize(QtCore.QSize(20,20 ))
         self.ResetButton.clicked.connect(self.reset)
         self.databaseButton.clicked.connect(self.insertDatabase)
         self.closeButton.clicked.connect(self.closeEvent)
+        self.closeButton.setIcon(QtGui.QIcon('4781839_cancel_circle_close_delete_discard_icon.png'))
+        self.closeButton.setIconSize(QtCore.QSize(20,20 ))
+        self.databasecheckBox.stateChanged.connect(self.saveToDatabase)
+
+   
+        #set icon color
+        self.closeButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;" "color: Black;")
+        self.submitButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.databaseButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.openFileButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.ResetButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.deleteButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.insertButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.EditButton.setStyleSheet("background-color:#9BB1BF;"   "border-radius: 7px;")
+
         
-        self.insertButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
 
-        self.ResetButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
-        self.EditButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
-        self.submitButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
-        self.deleteButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
-        self.openFileButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
 
-        self.databaseButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
+        self.datasetTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.colTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.commentTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.urlTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.EnergyComboList.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.databaseComboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.locationLabel.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.colNameslist.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
 
-        self.closeButton.setStyleSheet("background-color: #009DE1;" "color: white;" 
-                                        "font-size: 10px;" "font-weight: bold;" 
-                                        "border-radius: 4px;" "border: 1px solid #009DE1;" 
-                                        "opacity: 0.8;")
+        self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+
+        #place holder text to DatatextEdit
+        self.datasetTextEdit.setPlaceholderText("Enter your Dataset Name")
+        
+
+
+
+
+        self.show()
 
         if self.DataTableWidget.rowCount() > 0:
             self.deleteButton.setDisabled(False)
@@ -119,10 +140,13 @@ class UI(QtWidgets.QDialog):
          
         self.show()
 
+    def saveToDatabase(self):
+        pass
+
     def closeEvent(self):
         addedDataframe = pd.DataFrame(list(addedRows.values()), columns = ['Name of Dataset', 'Energy Type', 'File Type', 'Comments', 'Created Date'])   
         addedDataframe.to_sql('addedData', connection, if_exists='replace', index = False)
-        sys.exit()
+        self.close()
 
 
     def openFile(self):
@@ -184,6 +208,8 @@ class UI(QtWidgets.QDialog):
             self.commentTextEdit.clear()
             self.colNameslist.clear()
             self.colTextEdit.clear()
+    
+        
         
     def sumbit(self):
 
@@ -213,11 +239,11 @@ class UI(QtWidgets.QDialog):
             cursor = connection.cursor()
 
             users = pd.read_csv(fname[0], encoding= 'unicode_escape')
+            
 
-            # messege box for : do you want to save it to Databse or not?
-            message = QtWidgets.QMessageBox.question(self, "Save", "Do you want to save it to Database?", QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-            if message == QtWidgets.QMessageBox.Yes:
-                users.to_sql(f'{self.datasetTextEdit.toPlainText()}', connection, if_exists='append', index = False)
+            if self.databasecheckBox.isChecked():
+                users.to_sql(self.datasetTextEdit.toPlainText(), connection, if_exists='replace', index = False)
+            
             self.loaddata()
             self.locationLabel.clear()
             self.datasetTextEdit.clear()
