@@ -1,5 +1,7 @@
+from calendar import EPOCH
 from email import message
-from tkinter import messagebox
+from smtplib import quotedata
+
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtWidgets import QFileDialog, QMessageBox,QHBoxLayout, QWidget, QFrame
 import sys
@@ -15,15 +17,17 @@ from datetime import datetime
 import random
 import string
 import uuid 
+import time
 #add libraries
 
 DataSets = {}
 urlData = {}
 addedDatabases = []
 addedRows ={}
+epochTimes = {}
 
-connection = sqlite3.connect('data.db')
-cursor = connection.cursor()
+
+
 # print(addedRows.values())
 
 
@@ -75,18 +79,14 @@ class UI(QtWidgets.QDialog):
         self.openFileButton = self.findChild(QtWidgets.QPushButton, "openFileButton")
         self.ResetButton = self.findChild(QtWidgets.QPushButton, "ResetButton")
         self.mdiArea = self.findChild(QtWidgets.QMdiArea, "mdiArea")
-   
+
+        
         self.insertButton.clicked.connect(self.insertFile)
         self.updateButton.clicked.connect(self.updateDataView)
         self.EditButton.clicked.connect(self.editData)
-<<<<<<< Updated upstream
         # self.EditButton.setIcon(QtGui.QIcon('383148_edit_icon(1).png'))
         # self.EditButton.setIconSize(QtCore.QSize(20,20 ))
 
-=======
-        self.EditButton.setIcon(QtGui.QIcon('383148_edit_icon(1).png'))
-        self.EditButton.setIconSize(QtCore.QSize(20,20 ))
->>>>>>> Stashed changes
         self.deleteButton.clicked.connect(self.deleteRecord)
         # self.deleteButton.setIcon(QtGui.QIcon('3669361_delete_ic_icon.png'))
         # self.deleteButton.setIconSize(QtCore.QSize(20,20 ))
@@ -96,7 +96,6 @@ class UI(QtWidgets.QDialog):
         # self.openFileButton.setIconSize(QtCore.QSize(20,20 ))
         self.ResetButton.clicked.connect(self.reset)
         self.databaseButton.clicked.connect(self.insertDatabase)
-<<<<<<< Updated upstream
         self.closeButton.clicked.connect(self.closeGUI)
         # self.closeButton.setIcon(QtGui.QIcon('4781839_cancel_circle_close_delete_discard_icon.png'))
         # self.closeButton.setIconSize(QtCore.QSize(20,20 ))
@@ -123,32 +122,6 @@ class UI(QtWidgets.QDialog):
         self.colNameslist.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
 
         self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
-=======
-        self.closeButton.clicked.connect(self.closeEvent)
-        self.closeButton.setIcon(QtGui.QIcon('4781839_cancel_circle_close_delete_discard_icon.png'))
-        self.closeButton.setIconSize(QtCore.QSize(20,20 ))
-        self.databasecheckBox.stateChanged.connect(self.saveToDatabase)
-
-        self.closeButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;" "color: Black;")
-        self.submitButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
-        self.databaseButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
-        self.openFileButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
-        self.ResetButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
-        self.deleteButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
-        self.insertButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
-        self.EditButton.setStyleSheet("background-color:#9BB1BF;"   "border-radius: 7px;")
-
-        self.datasetTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.colTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.commentTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.urlTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.EnergyComboList.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.databaseComboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.locationLabel.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.colNameslist.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
-        self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
->>>>>>> Stashed changes
         self.datasetTextEdit.setPlaceholderText("Enter your Dataset Name")
         self.show()
 
@@ -169,21 +142,14 @@ class UI(QtWidgets.QDialog):
         self.show()
     
     def saveToDatabase(self):
-<<<<<<< Updated upstream
-        users = pd.read_csv(fname[0], encoding= 'unicode_escape')
-        users.to_sql(self.datasetTextEdit.toPlainText(), connection, if_exists='replace', index = False)
+        print(self.DataTableWidget.rowCount())
+        for saveRow in range(self.DataTableWidget.rowCount()):
+            #users = pd.read_csv(, encoding= 'unicode_escape')
+            saveAs = self.DataTableWidget.item(saveRow, 0).text()
+            #users.to_sql(saveAs, connection, if_exists='replace', index = False)
         
 
     def closeGUI(self):
-=======
-        if self.databasecheckBox.isChecked():
-            self.databaseComboBox.setDisabled(False)
-            self.databaseButton.setDisabled(False)
-        else:
-            self.databaseComboBox.setDisabled(False)
-            self.databaseButton.setDisabled(False)
-        
->>>>>>> Stashed changes
 
         #addedDataframe = pd.DataFrame(list(addedRows.values()), columns = ['Name of Dataset', 'Energy Type', 'File Type', 'Comments', 'Created Date'])   
         #addedDataframe.to_sql('addedData', connection, if_exists='replace', index = False)
@@ -239,8 +205,6 @@ class UI(QtWidgets.QDialog):
             self.EnergyComboList.setCurrentText(fileExtension) 
             global df
             df = pd.read_csv(fname[0], encoding= 'unicode_escape')
-            
-
             for item in df.columns.values.tolist():
                  self.colNameslist.addItem(item)
             self.colTextEdit.setPlainText(str(self.colNameslist.count()))
@@ -275,31 +239,30 @@ class UI(QtWidgets.QDialog):
         #check if given URL is existing
         #url validation
         global now
-        now = datetime.now()
+        now = time.time()
+
         validationValue =validators.url(self.urlTextEdit.toPlainText())
 
         
-        if self.datasetTextEdit.toPlainText() == "":            
-            message = QtWidgets.QMessageBox.warning(self, "Warning", "Please enter a dataset name")     
+        if self.datasetTextEdit.toPlainText() == "": 
+            
+            message = QtWidgets.QMessageBox.warning(self, "Warning", "Please enter a dataset name")
+            
         elif validationValue != True:
-            message = QtWidgets.QMessageBox.warning(self, "Warning", "Invalid URL")          
+            message = QtWidgets.QMessageBox.warning(self, "Warning", "Invalid URL") 
+            
+
         elif self.commentTextEdit.toPlainText() == "":
             message = QtWidgets.QMessageBox.warning(self, "Warning", "Please write a comment")
+         
 
         else:         
             global targetedDatabase
             targetedDatabase = self.databaseComboBox.currentText()
             connection = sqlite3.connect(targetedDatabase)
             cursor = connection.cursor()
-<<<<<<< Updated upstream
             
                               
-=======
-            users = pd.read_csv(fname[0], encoding= 'unicode_escape')
-            
-            if self.databasecheckBox.isChecked():
-                users.to_sql(self.datasetTextEdit.toPlainText(), connection, if_exists='replace', index = False)
->>>>>>> Stashed changes
             self.loaddata()
             self.locationLabel.clear()
             self.datasetTextEdit.clear()
@@ -310,11 +273,25 @@ class UI(QtWidgets.QDialog):
         self.buttonStatusChanged()
         
     def editData(self):
-        self.datasetTextEdit.setText(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 0).text())
-        self.urlTextEdit.setText(DataSets[self.DataTableWidget.currentRow()][1])
-        self.locationLabel.setText(DataSets[self.DataTableWidget.currentRow()][0])
-        self.commentTextEdit.setText(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 3).text())
-        self.colNameslist.insertItems(0, DataSets[self.DataTableWidget.currentRow()][2])
+        selectedRow = self.DataTableWidget.currentRow()
+        print(selectedRow)
+        grabbedTimeWidget = self.DataTableWidget.item(selectedRow, 4)
+        print(grabbedTimeWidget.text())
+        global targetedEpoch
+        targetedEpoch = list(epochTimes.keys())[list(epochTimes.values()).index(grabbedTimeWidget.text())]
+        
+
+
+        #list of keys
+        #list(epochTimes.keys())
+        #list of values
+        #list(epochTimes.values())
+
+        self.datasetTextEdit.setText(addedRows[targetedEpoch][0])
+        self.urlTextEdit.setText(addedRows[targetedEpoch][6])
+        self.locationLabel.setText(addedRows[targetedEpoch][5])
+        self.commentTextEdit.setText(addedRows[targetedEpoch][3])
+        self.colNameslist.insertItems(0, addedRows[targetedEpoch][-1])
         # connection = sqlite3.connect(DataSets[self.DataTableWidget.currentRow()][3])
         # cursor = connection.cursor()
         # tobeDeleted = str(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 0).text())
@@ -322,29 +299,30 @@ class UI(QtWidgets.QDialog):
         # cursor.execute("DROP TABLE IF EXISTS" + ' '+ tobeDeleted)
         # connection.commit()
         # self.colTextEdit.setPlainText(str(len(DataSets[self.DataTableWidget.currentRow()][2])))
-        self.colTextEdit.setPlainText(addedRows[self.DataTableWidget.currentRow()][8])
+        self.colTextEdit.setPlainText(addedRows[targetedEpoch][8])
         
-        self.EnergycomboBox.setCurrentText(DataSets[self.DataTableWidget.currentRow()][4])
-        self.EnergyComboList.setCurrentText(DataSets[self.DataTableWidget.currentRow()][5])
-        self.databaseComboBox.setCurrentText(DataSets[self.DataTableWidget.currentRow()][3])
+        self.EnergycomboBox.setCurrentText(addedRows[targetedEpoch][1])
+        self.EnergyComboList.setCurrentText(addedRows[targetedEpoch][2])
+        self.databaseComboBox.setCurrentText(addedRows[targetedEpoch][7])
         self.DataTableWidget.removeRow(self.DataTableWidget.currentRow())
         self.buttonStatusChanged()
 
 
     def loaddata(self):
-        
+        epochTimes[now] = datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S')
         Data = [{"Name of Dataset": self.datasetTextEdit.toPlainText(),
                 "Energy Type": self.EnergycomboBox.currentText(),
                     "File Type": self.EnergyComboList.currentText(), 
                     "Comments": self.commentTextEdit.toPlainText(),
                     "Location": self.locationLabel.text(),
                     "URL": self.urlTextEdit.toPlainText(),
-                    "Created Date": now.strftime("%Y-%m-%d %H:%M:%S"),
+                    "Created Date": epochTimes[now],
                     "Database": self.databaseComboBox.currentText(),
                     "NoColumns": self.colTextEdit.toPlainText(),
                     "ColumnNames": df.columns.values.tolist()
                     
                     }]
+
         
         row = self.DataTableWidget.rowCount()       
         self.DataTableWidget.setRowCount(row + 1 ) 
@@ -362,8 +340,8 @@ class UI(QtWidgets.QDialog):
             #generate a random ID for each row
             randomID = random.randint(1000000000, 9999999999)
 
-            rowID = str(randomID)+ ''.join(random.choices(data["Name of Dataset"] + data["Energy Type"] + data["File Type"], k=5)))
-            addedRows[row] = [
+            rowID = str(randomID)+ ''.join(random.choices(data["Name of Dataset"] + data["Energy Type"] + data["File Type"], k=5))
+            addedRows[now] = [
                         data["Name of Dataset"],data["Energy Type"],data["File Type"],
                         data["Comments"],data["Created Date"],data["Location"],
                         data["URL"],data["Database"],data["NoColumns"],data["ColumnNames"]
