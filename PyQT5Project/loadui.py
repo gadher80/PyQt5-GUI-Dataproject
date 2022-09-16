@@ -75,14 +75,18 @@ class UI(QtWidgets.QDialog):
         self.openFileButton = self.findChild(QtWidgets.QPushButton, "openFileButton")
         self.ResetButton = self.findChild(QtWidgets.QPushButton, "ResetButton")
         self.mdiArea = self.findChild(QtWidgets.QMdiArea, "mdiArea")
-
-        
+   
         self.insertButton.clicked.connect(self.insertFile)
         self.updateButton.clicked.connect(self.updateDataView)
         self.EditButton.clicked.connect(self.editData)
+<<<<<<< Updated upstream
         # self.EditButton.setIcon(QtGui.QIcon('383148_edit_icon(1).png'))
         # self.EditButton.setIconSize(QtCore.QSize(20,20 ))
 
+=======
+        self.EditButton.setIcon(QtGui.QIcon('383148_edit_icon(1).png'))
+        self.EditButton.setIconSize(QtCore.QSize(20,20 ))
+>>>>>>> Stashed changes
         self.deleteButton.clicked.connect(self.deleteRecord)
         # self.deleteButton.setIcon(QtGui.QIcon('3669361_delete_ic_icon.png'))
         # self.deleteButton.setIconSize(QtCore.QSize(20,20 ))
@@ -92,6 +96,7 @@ class UI(QtWidgets.QDialog):
         # self.openFileButton.setIconSize(QtCore.QSize(20,20 ))
         self.ResetButton.clicked.connect(self.reset)
         self.databaseButton.clicked.connect(self.insertDatabase)
+<<<<<<< Updated upstream
         self.closeButton.clicked.connect(self.closeGUI)
         # self.closeButton.setIcon(QtGui.QIcon('4781839_cancel_circle_close_delete_discard_icon.png'))
         # self.closeButton.setIconSize(QtCore.QSize(20,20 ))
@@ -118,6 +123,32 @@ class UI(QtWidgets.QDialog):
         self.colNameslist.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
 
         self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
+=======
+        self.closeButton.clicked.connect(self.closeEvent)
+        self.closeButton.setIcon(QtGui.QIcon('4781839_cancel_circle_close_delete_discard_icon.png'))
+        self.closeButton.setIconSize(QtCore.QSize(20,20 ))
+        self.databasecheckBox.stateChanged.connect(self.saveToDatabase)
+
+        self.closeButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;" "color: Black;")
+        self.submitButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.databaseButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.openFileButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.ResetButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.deleteButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.insertButton.setStyleSheet("background-color:#9BB1BF;" "border-radius: 7px;")
+        self.EditButton.setStyleSheet("background-color:#9BB1BF;"   "border-radius: 7px;")
+
+        self.datasetTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.colTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.commentTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.urlTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.EnergyComboList.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.databaseComboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.locationLabel.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.colNameslist.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+        self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" "border-radius: 7px;")
+>>>>>>> Stashed changes
         self.datasetTextEdit.setPlaceholderText("Enter your Dataset Name")
         self.show()
 
@@ -138,11 +169,21 @@ class UI(QtWidgets.QDialog):
         self.show()
     
     def saveToDatabase(self):
+<<<<<<< Updated upstream
         users = pd.read_csv(fname[0], encoding= 'unicode_escape')
         users.to_sql(self.datasetTextEdit.toPlainText(), connection, if_exists='replace', index = False)
         
 
     def closeGUI(self):
+=======
+        if self.databasecheckBox.isChecked():
+            self.databaseComboBox.setDisabled(False)
+            self.databaseButton.setDisabled(False)
+        else:
+            self.databaseComboBox.setDisabled(False)
+            self.databaseButton.setDisabled(False)
+        
+>>>>>>> Stashed changes
 
         #addedDataframe = pd.DataFrame(list(addedRows.values()), columns = ['Name of Dataset', 'Energy Type', 'File Type', 'Comments', 'Created Date'])   
         #addedDataframe.to_sql('addedData', connection, if_exists='replace', index = False)
@@ -238,25 +279,27 @@ class UI(QtWidgets.QDialog):
         validationValue =validators.url(self.urlTextEdit.toPlainText())
 
         
-        if self.datasetTextEdit.toPlainText() == "": 
-            
-            message = QtWidgets.QMessageBox.warning(self, "Warning", "Please enter a dataset name")
-            
+        if self.datasetTextEdit.toPlainText() == "":            
+            message = QtWidgets.QMessageBox.warning(self, "Warning", "Please enter a dataset name")     
         elif validationValue != True:
-            message = QtWidgets.QMessageBox.warning(self, "Warning", "Invalid URL") 
-            
-
+            message = QtWidgets.QMessageBox.warning(self, "Warning", "Invalid URL")          
         elif self.commentTextEdit.toPlainText() == "":
             message = QtWidgets.QMessageBox.warning(self, "Warning", "Please write a comment")
-         
 
         else:         
             global targetedDatabase
             targetedDatabase = self.databaseComboBox.currentText()
             connection = sqlite3.connect(targetedDatabase)
             cursor = connection.cursor()
+<<<<<<< Updated upstream
             
                               
+=======
+            users = pd.read_csv(fname[0], encoding= 'unicode_escape')
+            
+            if self.databasecheckBox.isChecked():
+                users.to_sql(self.datasetTextEdit.toPlainText(), connection, if_exists='replace', index = False)
+>>>>>>> Stashed changes
             self.loaddata()
             self.locationLabel.clear()
             self.datasetTextEdit.clear()
