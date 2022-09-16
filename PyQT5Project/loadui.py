@@ -319,7 +319,7 @@ class UI(QtWidgets.QDialog):
             #generate a random ID for each row
             randomID = random.randint(1000000000, 9999999999)
 
-            rowID = str(randomID)+ ''.join(random.choices(data["Name of Dataset"] + data["Energy Type"] + data["File Type"], k=5)))
+            rowID = str(randomID)+ ''.join(random.choices(data["Name of Dataset"] + data["Energy Type"] + data["File Type"], k=5))
             addedRows[row] = [
                         data["Name of Dataset"],data["Energy Type"],data["File Type"],
                         data["Comments"],data["Created Date"],data["Location"],
