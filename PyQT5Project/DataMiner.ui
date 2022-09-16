@@ -22,9 +22,14 @@
   <property name="font">
    <font>
     <pointsize>9</pointsize>
-    <weight>50</weight>
     <bold>false</bold>
    </font>
+  </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
+  <property name="tabletTracking">
+   <bool>true</bool>
   </property>
   <property name="focusPolicy">
    <enum>Qt::TabFocus</enum>
@@ -56,6 +61,7 @@
    <property name="font">
     <font>
      <pointsize>9</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <item>
@@ -101,6 +107,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -119,6 +126,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -137,6 +145,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -147,7 +156,11 @@
    <property name="geometry">
     <rect>
      <x>610</x>
+<<<<<<< HEAD
      <y>590</y>
+=======
+     <y>610</y>
+>>>>>>> 156e96e03c374f63da4918b80511e359d7fa85dc
      <width>51</width>
      <height>21</height>
     </rect>
@@ -155,6 +168,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -173,6 +187,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -191,6 +206,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -209,6 +225,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -218,8 +235,13 @@
   <widget class="QPushButton" name="ResetButton">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>140</x>
      <y>900</y>
+=======
+     <x>120</x>
+     <y>270</y>
+>>>>>>> 156e96e03c374f63da4918b80511e359d7fa85dc
      <width>561</width>
      <height>23</height>
     </rect>
@@ -227,6 +249,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -254,6 +277,7 @@
    <property name="font">
     <font>
      <pointsize>9</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="contextMenuPolicy">
@@ -311,6 +335,12 @@
    <property name="alternatingRowColors">
     <bool>true</bool>
    </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
    <property name="showGrid">
     <bool>true</bool>
    </property>
@@ -349,8 +379,13 @@
   <widget class="QPushButton" name="updateButton">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>140</x>
      <y>870</y>
+=======
+     <x>120</x>
+     <y>240</y>
+>>>>>>> 156e96e03c374f63da4918b80511e359d7fa85dc
      <width>561</width>
      <height>23</height>
     </rect>
@@ -358,6 +393,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -376,6 +412,7 @@
    <property name="font">
     <font>
      <pointsize>8</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="autoFillBackground">
@@ -415,7 +452,7 @@
    <property name="readOnly">
     <bool>true</bool>
    </property>
-   <property name="tabStopWidth">
+   <property name="tabStopWidth" stdset="0">
     <number>79</number>
    </property>
   </widget>
@@ -459,7 +496,7 @@
    </property>
    <property name="font">
     <font>
-     <weight>50</weight>
+     <pointsize>9</pointsize>
      <bold>false</bold>
     </font>
    </property>
@@ -514,7 +551,11 @@
    <property name="geometry">
     <rect>
      <x>610</x>
+<<<<<<< HEAD
      <y>610</y>
+=======
+     <y>630</y>
+>>>>>>> 156e96e03c374f63da4918b80511e359d7fa85dc
      <width>91</width>
      <height>23</height>
     </rect>
@@ -552,6 +593,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -570,6 +612,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -588,6 +631,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -606,6 +650,7 @@
    <property name="font">
     <font>
      <pointsize>9</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -655,6 +700,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -738,6 +784,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -757,6 +804,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+<<<<<<< HEAD
   <widget class="QLabel" name="label_10">
    <property name="geometry">
     <rect>
@@ -776,6 +824,8 @@
     <string/>
    </property>
   </widget>
+=======
+>>>>>>> 156e96e03c374f63da4918b80511e359d7fa85dc
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
@@ -788,7 +838,6 @@
    <property name="font">
     <font>
      <pointsize>12</pointsize>
-     <weight>50</weight>
      <bold>false</bold>
     </font>
    </property>
@@ -840,7 +889,6 @@ background-color: rgb(240, 240, 240);</string>
    <property name="font">
     <font>
      <pointsize>12</pointsize>
-     <weight>50</weight>
      <bold>false</bold>
     </font>
    </property>
@@ -873,14 +921,60 @@ background-color: rgb(240, 240, 240);</string>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
     <string>Save</string>
    </property>
   </widget>
+  <widget class="QScrollArea" name="scrollArea">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>300</y>
+     <width>611</width>
+     <height>611</height>
+    </rect>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>609</width>
+      <height>609</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="label_10">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>-30</y>
+       <width>91</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <zorder>scrollArea</zorder>
   <zorder>label_12</zorder>
-  <zorder>label_10</zorder>
   <zorder>EnergycomboBox</zorder>
   <zorder>label_2</zorder>
   <zorder>label_3</zorder>

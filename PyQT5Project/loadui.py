@@ -1,5 +1,7 @@
+from calendar import EPOCH
 from email import message
-from tkinter import messagebox
+from smtplib import quotedata
+
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from PyQt5.QtWidgets import QFileDialog, QMessageBox,QHBoxLayout, QWidget, QFrame
 import sys
@@ -15,15 +17,17 @@ from datetime import datetime
 import random
 import string
 import uuid 
+import time
 #add libraries
 
 DataSets = {}
 urlData = {}
 addedDatabases = []
 addedRows ={}
+epochTimes = {}
 
-connection = sqlite3.connect('data.db')
-cursor = connection.cursor()
+
+
 # print(addedRows.values())
 
 
@@ -138,8 +142,11 @@ class UI(QtWidgets.QDialog):
         self.show()
     
     def saveToDatabase(self):
-        users = pd.read_csv(fname[0], encoding= 'unicode_escape')
-        users.to_sql(self.datasetTextEdit.toPlainText(), connection, if_exists='replace', index = False)
+        print(self.DataTableWidget.rowCount())
+        for saveRow in range(self.DataTableWidget.rowCount()):
+            #users = pd.read_csv(, encoding= 'unicode_escape')
+            saveAs = self.DataTableWidget.item(saveRow, 0).text()
+            #users.to_sql(saveAs, connection, if_exists='replace', index = False)
         
 
     def closeGUI(self):
@@ -198,8 +205,6 @@ class UI(QtWidgets.QDialog):
             self.EnergyComboList.setCurrentText(fileExtension) 
             global df
             df = pd.read_csv(fname[0], encoding= 'unicode_escape')
-            
-
             for item in df.columns.values.tolist():
                  self.colNameslist.addItem(item)
             self.colTextEdit.setPlainText(str(self.colNameslist.count()))
@@ -234,7 +239,8 @@ class UI(QtWidgets.QDialog):
         #check if given URL is existing
         #url validation
         global now
-        now = datetime.now()
+        now = time.time()
+
         validationValue =validators.url(self.urlTextEdit.toPlainText())
 
         
@@ -267,11 +273,25 @@ class UI(QtWidgets.QDialog):
         self.buttonStatusChanged()
         
     def editData(self):
-        self.datasetTextEdit.setText(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 0).text())
-        self.urlTextEdit.setText(DataSets[self.DataTableWidget.currentRow()][1])
-        self.locationLabel.setText(DataSets[self.DataTableWidget.currentRow()][0])
-        self.commentTextEdit.setText(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 3).text())
-        self.colNameslist.insertItems(0, DataSets[self.DataTableWidget.currentRow()][2])
+        selectedRow = self.DataTableWidget.currentRow()
+        print(selectedRow)
+        grabbedTimeWidget = self.DataTableWidget.item(selectedRow, 4)
+        print(grabbedTimeWidget.text())
+        global targetedEpoch
+        targetedEpoch = list(epochTimes.keys())[list(epochTimes.values()).index(grabbedTimeWidget.text())]
+        
+
+
+        #list of keys
+        #list(epochTimes.keys())
+        #list of values
+        #list(epochTimes.values())
+
+        self.datasetTextEdit.setText(addedRows[targetedEpoch][0])
+        self.urlTextEdit.setText(addedRows[targetedEpoch][6])
+        self.locationLabel.setText(addedRows[targetedEpoch][5])
+        self.commentTextEdit.setText(addedRows[targetedEpoch][3])
+        self.colNameslist.insertItems(0, addedRows[targetedEpoch][-1])
         # connection = sqlite3.connect(DataSets[self.DataTableWidget.currentRow()][3])
         # cursor = connection.cursor()
         # tobeDeleted = str(self.DataTableWidget.item(self.DataTableWidget.currentRow(), 0).text())
@@ -279,29 +299,30 @@ class UI(QtWidgets.QDialog):
         # cursor.execute("DROP TABLE IF EXISTS" + ' '+ tobeDeleted)
         # connection.commit()
         # self.colTextEdit.setPlainText(str(len(DataSets[self.DataTableWidget.currentRow()][2])))
-        self.colTextEdit.setPlainText(addedRows[self.DataTableWidget.currentRow()][8])
+        self.colTextEdit.setPlainText(addedRows[targetedEpoch][8])
         
-        self.EnergycomboBox.setCurrentText(DataSets[self.DataTableWidget.currentRow()][4])
-        self.EnergyComboList.setCurrentText(DataSets[self.DataTableWidget.currentRow()][5])
-        self.databaseComboBox.setCurrentText(DataSets[self.DataTableWidget.currentRow()][3])
+        self.EnergycomboBox.setCurrentText(addedRows[targetedEpoch][1])
+        self.EnergyComboList.setCurrentText(addedRows[targetedEpoch][2])
+        self.databaseComboBox.setCurrentText(addedRows[targetedEpoch][7])
         self.DataTableWidget.removeRow(self.DataTableWidget.currentRow())
         self.buttonStatusChanged()
 
 
     def loaddata(self):
-        
+        epochTimes[now] = datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S')
         Data = [{"Name of Dataset": self.datasetTextEdit.toPlainText(),
                 "Energy Type": self.EnergycomboBox.currentText(),
                     "File Type": self.EnergyComboList.currentText(), 
                     "Comments": self.commentTextEdit.toPlainText(),
                     "Location": self.locationLabel.text(),
                     "URL": self.urlTextEdit.toPlainText(),
-                    "Created Date": now.strftime("%Y-%m-%d %H:%M:%S"),
+                    "Created Date": epochTimes[now],
                     "Database": self.databaseComboBox.currentText(),
                     "NoColumns": self.colTextEdit.toPlainText(),
                     "ColumnNames": df.columns.values.tolist()
                     
                     }]
+
         
         row = self.DataTableWidget.rowCount()       
         self.DataTableWidget.setRowCount(row + 1 ) 
@@ -320,7 +341,11 @@ class UI(QtWidgets.QDialog):
             randomID = random.randint(1000000000, 9999999999)
 
             rowID = str(randomID)+ ''.join(random.choices(data["Name of Dataset"] + data["Energy Type"] + data["File Type"], k=5))
+<<<<<<< HEAD
             addedRows[row] = [
+=======
+            addedRows[now] = [
+>>>>>>> 156e96e03c374f63da4918b80511e359d7fa85dc
                         data["Name of Dataset"],data["Energy Type"],data["File Type"],
                         data["Comments"],data["Created Date"],data["Location"],
                         data["URL"],data["Database"],data["NoColumns"],data["ColumnNames"]
