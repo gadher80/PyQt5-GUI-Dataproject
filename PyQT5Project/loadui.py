@@ -1,5 +1,6 @@
 from calendar import EPOCH
 from email import message
+from multiprocessing import connection
 from smtplib import quotedata
 
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
@@ -27,8 +28,8 @@ addedRows ={}
 epochTimes = {}
 
 
-
 # print(addedRows.values())
+
 
 
 
@@ -144,9 +145,15 @@ class UI(QtWidgets.QDialog):
     def saveToDatabase(self):
         print(self.DataTableWidget.rowCount())
         for saveRow in range(self.DataTableWidget.rowCount()):
-            #users = pd.read_csv(, encoding= 'unicode_escape')
+            timeWidgetAT = self.DataTableWidget.item(saveRow, 4)
+            findEpochTimeThatRow = list(epochTimes.keys())[list(epochTimes.values()).index(timeWidgetAT.text())]
+
+            saveTothisDatabase = addedRows[findEpochTimeThatRow][7]
+            connection = sqlite3.connect(saveTothisDatabase)
+            cursor = connection.cursor()
+            users = pd.read_csv(addedRows[findEpochTimeThatRow][5], encoding= 'unicode_escape')
             saveAs = self.DataTableWidget.item(saveRow, 0).text()
-            #users.to_sql(saveAs, connection, if_exists='replace', index = False)
+            users.to_sql(addedRows[findEpochTimeThatRow][0], connection, if_exists='replace', index = False)
         
 
     def closeGUI(self):
@@ -194,7 +201,6 @@ class UI(QtWidgets.QDialog):
         self.updateButton.setDisabled(False)
         global fname
         fname = QFileDialog.getOpenFileName(self, "Choose CSV", "","All files(*);;(*.csv);;(*.json);;(*.xlsm);;(*.xlsx)")
-
         if fname: 
             
             self.locationLabel.setText(fname[0])
@@ -260,9 +266,7 @@ class UI(QtWidgets.QDialog):
             global targetedDatabase
             targetedDatabase = self.databaseComboBox.currentText()
             connection = sqlite3.connect(targetedDatabase)
-            cursor = connection.cursor()
-            
-                              
+            cursor = connection.cursor()                            
             self.loaddata()
             self.locationLabel.clear()
             self.datasetTextEdit.clear()
@@ -279,8 +283,6 @@ class UI(QtWidgets.QDialog):
         print(grabbedTimeWidget.text())
         global targetedEpoch
         targetedEpoch = list(epochTimes.keys())[list(epochTimes.values()).index(grabbedTimeWidget.text())]
-        
-
 
         #list of keys
         #list(epochTimes.keys())
@@ -325,7 +327,7 @@ class UI(QtWidgets.QDialog):
 
         
         row = self.DataTableWidget.rowCount()       
-        self.DataTableWidget.setRowCount(row + 1 ) 
+        self.DataTableWidget.setRowCount(row + 1 )      
         
         for data in Data:
             self.DataTableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(data["Name of Dataset"]))
@@ -341,11 +343,7 @@ class UI(QtWidgets.QDialog):
             randomID = random.randint(1000000000, 9999999999)
 
             rowID = str(randomID)+ ''.join(random.choices(data["Name of Dataset"] + data["Energy Type"] + data["File Type"], k=5))
-<<<<<<< HEAD
-            addedRows[row] = [
-=======
             addedRows[now] = [
->>>>>>> 156e96e03c374f63da4918b80511e359d7fa85dc
                         data["Name of Dataset"],data["Energy Type"],data["File Type"],
                         data["Comments"],data["Created Date"],data["Location"],
                         data["URL"],data["Database"],data["NoColumns"],data["ColumnNames"]
