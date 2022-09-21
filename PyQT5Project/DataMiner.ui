@@ -10,7 +10,11 @@
     <x>0</x>
     <y>0</y>
     <width>1355</width>
+<<<<<<< HEAD
     <height>733</height>
+=======
+    <height>788</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
    </rect>
   </property>
   <property name="sizePolicy">
@@ -53,14 +57,89 @@
   <widget class="QPushButton" name="EditButton">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>1250</x>
      <y>130</y>
+=======
+     <x>510</x>
+     <y>290</y>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
      <width>91</width>
      <height>23</height>
     </rect>
    </property>
    <property name="font">
     <font>
+<<<<<<< HEAD
+=======
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <item>
+    <property name="text">
+     <string>Solar</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Wind</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Biomass</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Geothermal</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hydropower</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Other</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>200</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Upload Datafile</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>270</y>
+     <width>121</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
      <pointsize>10</pointsize>
      <weight>50</weight>
      <bold>false</bold>
@@ -73,10 +152,17 @@
   <widget class="QPushButton" name="deleteButton">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>1250</x>
      <y>160</y>
      <width>91</width>
      <height>23</height>
+=======
+     <x>40</x>
+     <y>340</y>
+     <width>71</width>
+     <height>16</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
     </rect>
    </property>
    <property name="font">
@@ -93,10 +179,17 @@
   <widget class="QPushButton" name="openFileButton">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>1250</x>
      <y>100</y>
      <width>91</width>
      <height>23</height>
+=======
+     <x>510</x>
+     <y>410</y>
+     <width>51</width>
+     <height>21</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
     </rect>
    </property>
    <property name="font">
@@ -113,10 +206,17 @@
   <widget class="QPushButton" name="closeButton">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>1250</x>
      <y>190</y>
      <width>91</width>
      <height>23</height>
+=======
+     <x>40</x>
+     <y>410</y>
+     <width>81</width>
+     <height>16</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
     </rect>
    </property>
    <property name="font">
@@ -133,25 +233,107 @@
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>30</x>
      <y>90</y>
      <width>71</width>
      <height>21</height>
+=======
+     <x>510</x>
+     <y>470</y>
+     <width>71</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>10</pointsize>
      <weight>50</weight>
      <bold>false</bold>
     </font>
    </property>
+   <property name="text">
+    <string>No. columns</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>550</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Comments</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ResetButton">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>720</y>
+     <width>111</width>
+     <height>23</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+<<<<<<< HEAD
+     <pointsize>12</pointsize>
+=======
+     <pointsize>10</pointsize>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+<<<<<<< HEAD
    <property name="whatsThis">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">
 background-color: rgb(240, 240, 240);</string>
+=======
+   <property name="text">
+    <string>Reset</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="insertButton">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>220</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
    </property>
    <property name="frameShape">
     <enum>QFrame::NoFrame</enum>
@@ -163,6 +345,7 @@ background-color: rgb(240, 240, 240);</string>
     <string>Insert file</string>
    </property>
   </widget>
+<<<<<<< HEAD
   <widget class="QLabel" name="label_12">
    <property name="geometry">
     <rect>
@@ -177,6 +360,88 @@ background-color: rgb(240, 240, 240);</string>
    </property>
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
+=======
+  <widget class="QTableWidget" name="DataTableWidget">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>130</y>
+     <width>531</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustToContents</enum>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="showGrid">
+    <bool>true</bool>
+   </property>
+   <property name="sortingEnabled">
+    <bool>false</bool>
+   </property>
+   <column>
+    <property name="text">
+     <string>Name of Dataset</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Energy Type</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>File Type</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Comments</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Time</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="updateButton">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>720</y>
+     <width>111</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
    </property>
    <property name="text">
     <string/>
@@ -185,15 +450,26 @@ background-color: rgb(240, 240, 240);</string>
   <widget class="QLabel" name="label_13">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>660</x>
      <y>90</y>
      <width>61</width>
      <height>21</height>
+=======
+     <x>40</x>
+     <y>360</y>
+     <width>561</width>
+     <height>23</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
     </rect>
    </property>
    <property name="font">
     <font>
+<<<<<<< HEAD
      <pointsize>12</pointsize>
+=======
+     <pointsize>8</pointsize>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
      <weight>50</weight>
      <bold>false</bold>
     </font>
@@ -218,15 +494,23 @@ background-color: rgb(240, 240, 240);</string>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>10</x>
      <y>100</y>
      <width>611</width>
      <height>611</height>
+=======
+     <x>40</x>
+     <y>220</y>
+     <width>451</width>
+     <height>23</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
     </rect>
    </property>
    <property name="widgetResizable">
     <bool>true</bool>
    </property>
+<<<<<<< HEAD
    <widget class="QWidget" name="scrollAreaWidgetContents">
     <property name="geometry">
      <rect>
@@ -765,75 +1049,138 @@ background-color: rgb(240, 240, 240);</string>
      </property>
     </widget>
    </widget>
+=======
+   <property name="tabStopWidth">
+    <number>79</number>
+   </property>
   </widget>
-  <widget class="QLabel" name="label_10">
+  <widget class="QTextEdit" name="urlTextEdit">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>30</y>
-     <width>206</width>
-     <height>33</height>
+     <x>40</x>
+     <y>290</y>
+     <width>451</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="commentTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>570</y>
+     <width>561</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="colNameslist">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>430</y>
+     <width>451</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Dataset Viewer</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>83</width>
-     <height>14</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Search Dataset</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="searchbar">
-   <property name="geometry">
-    <rect>
-     <x>770</x>
-     <y>140</y>
-     <width>321</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_14">
-   <property name="geometry">
-    <rect>
-     <x>670</x>
-     <y>140</y>
-     <width>91</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
+     <pointsize>9</pointsize>
      <weight>50</weight>
      <bold>false</bold>
     </font>
    </property>
-   <property name="text">
-    <string>Search dataset</string>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOn</enum>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="resizeMode">
+    <enum>QListView::Adjust</enum>
+   </property>
+   <property name="viewMode">
+    <enum>QListView::ListMode</enum>
+   </property>
+   <property name="uniformItemSizes">
+    <bool>false</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="searchFileButton">
+  <widget class="QTextEdit" name="colTextEdit">
    <property name="geometry">
     <rect>
-     <x>1110</x>
-     <y>140</y>
+     <x>510</x>
+     <y>490</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="EnergyComboList">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>430</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>CSV</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>XLSM</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>JSON</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>XLSX</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="EditButton">
+   <property name="geometry">
+    <rect>
+     <x>1250</x>
+     <y>130</y>
      <width>91</width>
      <height>23</height>
     </rect>
@@ -846,12 +1193,298 @@ background-color: rgb(240, 240, 240);</string>
     </font>
    </property>
    <property name="text">
+    <string>Edit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deleteButton">
+   <property name="geometry">
+    <rect>
+     <x>1250</x>
+     <y>160</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="openFileButton">
+   <property name="geometry">
+    <rect>
+     <x>1250</x>
+     <y>100</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="databaseButton">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>150</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Browse</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="databaseComboBox">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>150</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="duplicatesEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="frame">
+    <bool>false</bool>
+   </property>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+<<<<<<< HEAD
+     <x>570</x>
+     <y>30</y>
+     <width>206</width>
+     <height>33</height>
+=======
+     <x>1250</x>
+     <y>190</y>
+     <width>91</width>
+     <height>23</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+<<<<<<< HEAD
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+=======
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+    </font>
+   </property>
+   <property name="text">
+    <string>Dataset Viewer</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+<<<<<<< HEAD
+     <x>0</x>
+     <y>0</y>
+     <width>83</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Search Dataset</string>
+=======
+     <x>40</x>
+     <y>130</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Upload Database</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>180</y>
+     <width>561</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="searchbar">
+   <property name="geometry">
+    <rect>
+<<<<<<< HEAD
+     <x>770</x>
+     <y>140</y>
+     <width>321</width>
+     <height>20</height>
+=======
+     <x>40</x>
+     <y>250</y>
+     <width>551</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>320</y>
+     <width>561</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_4">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>390</y>
+     <width>561</width>
+     <height>16</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_14">
+   <property name="geometry">
+    <rect>
+<<<<<<< HEAD
+     <x>670</x>
+     <y>140</y>
+     <width>91</width>
+=======
+     <x>510</x>
+     <y>270</y>
+     <width>71</width>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+<<<<<<< HEAD
+    <string>Search dataset</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="searchFileButton">
+   <property name="geometry">
+    <rect>
+     <x>1110</x>
+     <y>140</y>
+     <width>91</width>
+     <height>23</height>
+=======
+    <string>Energy</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line_5">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>530</y>
+     <width>561</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>90</y>
+     <width>71</width>
+     <height>21</height>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+<<<<<<< HEAD
+     <pointsize>10</pointsize>
+=======
+     <pointsize>12</pointsize>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+<<<<<<< HEAD
     <string>Search</string>
+=======
+    <string>Insert file</string>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
    </property>
   </widget>
   <widget class="QTableWidget" name="DataTableWidget">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>670</x>
      <y>180</y>
      <width>531</width>
@@ -863,6 +1496,39 @@ background-color: rgb(240, 240, 240);</string>
    </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
+=======
+     <x>640</x>
+     <y>100</y>
+     <width>591</width>
+     <height>641</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>90</y>
+     <width>61</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
    </property>
    <property name="autoFillBackground">
     <bool>true</bool>
@@ -876,6 +1542,7 @@ background-color: rgb(240, 240, 240);</string>
    <property name="dragDropMode">
     <enum>QAbstractItemView::DragOnly</enum>
    </property>
+<<<<<<< HEAD
    <property name="defaultDropAction">
     <enum>Qt::IgnoreAction</enum>
    </property>
@@ -884,12 +1551,45 @@ background-color: rgb(240, 240, 240);</string>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>
+=======
+   <property name="text">
+    <string>Datasets</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="saveButton">
+   <property name="geometry">
+    <rect>
+     <x>1250</x>
+     <y>220</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
    </property>
    <property name="selectionBehavior">
     <enum>QAbstractItemView::SelectRows</enum>
    </property>
+<<<<<<< HEAD
    <property name="showGrid">
     <bool>true</bool>
+=======
+  </widget>
+  <widget class="QScrollArea" name="scrollArea">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>100</y>
+     <width>611</width>
+     <height>611</height>
+    </rect>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
    </property>
    <property name="sortingEnabled">
     <bool>true</bool>
@@ -907,6 +1607,7 @@ background-color: rgb(240, 240, 240);</string>
     <property name="text">
      <string>Name of Dataset</string>
     </property>
+<<<<<<< HEAD
    </column>
    <column>
     <property name="text">
@@ -933,6 +1634,29 @@ background-color: rgb(240, 240, 240);</string>
      <string>Path</string>
     </property>
    </column>
+=======
+   </widget>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>30</y>
+     <width>206</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Dataset Viewer</string>
+   </property>
   </widget>
   <zorder>scrollArea</zorder>
   <zorder>label_12</zorder>
@@ -942,12 +1666,17 @@ background-color: rgb(240, 240, 240);</string>
   <zorder>closeButton</zorder>
   <zorder>label_11</zorder>
   <zorder>label_13</zorder>
+<<<<<<< HEAD
   <zorder>label_10</zorder>
   <zorder>label</zorder>
   <zorder>searchbar</zorder>
   <zorder>label_14</zorder>
   <zorder>searchFileButton</zorder>
   <zorder>DataTableWidget</zorder>
+=======
+  <zorder>saveButton</zorder>
+  <zorder>label_10</zorder>
+>>>>>>> 68454781bbbfcf4a2f8f91285566bf230ffde05f
  </widget>
  <resources/>
  <connections/>
