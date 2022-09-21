@@ -484,7 +484,7 @@ background-color: rgb(240, 240, 240);</string>
        <x>20</x>
        <y>50</y>
        <width>451</width>
-       <height>23</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="focusPolicy">
@@ -842,9 +842,9 @@ background-color: rgb(240, 240, 240);</string>
    <property name="geometry">
     <rect>
      <x>670</x>
-     <y>180</y>
+     <y>190</y>
      <width>531</width>
-     <height>511</height>
+     <height>481</height>
     </rect>
    </property>
    <property name="mouseTracking">
@@ -1030,20 +1030,20 @@ border-color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
   </widget>
+  <zorder>label_12</zorder>
   <zorder>label_10</zorder>
   <zorder>scrollArea</zorder>
-  <zorder>label_12</zorder>
   <zorder>EditButton</zorder>
   <zorder>deleteButton</zorder>
   <zorder>openFileButton</zorder>
   <zorder>closeButton</zorder>
-  <zorder>label_11</zorder>
-  <zorder>label_13</zorder>
   <zorder>label_10</zorder>
   <zorder>searchbar</zorder>
   <zorder>DataTableWidget</zorder>
   <zorder>SearchToolButton</zorder>
   <zorder>BacktoolButton</zorder>
+  <zorder>label_13</zorder>
+  <zorder>label_11</zorder>
  </widget>
  <resources/>
  <connections/>
