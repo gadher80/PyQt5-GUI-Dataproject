@@ -42,28 +42,20 @@ class UI(QtWidgets.QDialog):
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi("DataMiner.ui", self)
-
         self.displayData()
-
         self.DataTableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)    
-
         self.datasetTextEdit = self.findChild(QtWidgets.QTextEdit,"datasetTextEdit")
         self.colNameslist = self.findChild(QtWidgets.QListWidget,"colNameslist")
         self.commentLabel = self.findChild(QtWidgets.QLabel,"commentLabel")
         self.locationLabel = self.findChild(QtWidgets.QLabel,"locationLabel")
         self.urlTextEdit = self.findChild(QtWidgets.QTextEdit,"urlTextEdit")
         self.searchbar = self.findChild(QtWidgets.QLineEdit,"searchbar")
-        #self.datasetLabel = self.findChild(QtWidgets.QLabel,"datasetLabel")
-
         self.EnergyComboList = self.findChild(QtWidgets.QComboBox, "EnergyComboList")
         self.colTextEdit = self.findChild(QtWidgets.QTextEdit, "colTextEdit")
         self.EnergycomboBox = self.findChild(QtWidgets.QComboBox, "EnergycomboBox")
         self.DataTableWidget = self.findChild(QtWidgets.QTableWidget, "DataTableWidget")
-        #self.updateButton = self.findChild(QtWidgets.QPushButton, "updateButton")
         self.commentTextEdit = self.findChild(QtWidgets.QTextEdit, "commentTextEdit")
         self.closeButton = self.findChild(QtWidgets.QPushButton, "closeButton")
-        #self.databaseButton = self.findChild(QtWidgets.QPushButton, "databaseButton")
-        #self.databaseComboBox = self.findChild(QtWidgets.QComboBox, "databaseComboBox")
         self.saveButton = self.findChild(QtWidgets.QPushButton, "saveButton")
         self.commentTextEdit.setPlaceholderText("Enter your Comments")
         self.urlTextEdit.setPlaceholderText("Enter URL")
@@ -73,85 +65,44 @@ class UI(QtWidgets.QDialog):
         self.openFileButton = self.findChild(QtWidgets.QPushButton, "openFileButton")
         self.ResetButton = self.findChild(QtWidgets.QPushButton, "ResetButton")
         self.mdiArea = self.findChild(QtWidgets.QMdiArea, "mdiArea")
-        #self.searchFileButton = self.findChild(QtWidgets.QPushButton, "searchFileButton")
         self.searchbar = self.findChild(QtWidgets.QLineEdit, "searchbar")
         self.searchbar.setPlaceholderText("   "+"Search using Dataset Name or Energy Type or File Type")
-        #self.searchbar.textChanged.connect(self.autocompletion)
-
-
-
-
-
-
-
         self.SearchToolButton = self.findChild(QtWidgets.QToolButton, "SearchToolButton")
         self.BacktoolButton = self.findChild(QtWidgets.QToolButton, "BacktoolButton")
-        
-
-
         self.insertButton.clicked.connect(self.insertFile)
-        #self.updateButton.clicked.connect(self.updateDataView)
         self.EditButton.clicked.connect(self.editData)
-        # self.EditButton.setIcon(QtGui.QIcon('383148_edit_icon(1).png'))
-        # self.EditButton.setIconSize(QtCore.QSize(20,20 ))
-
         self.deleteButton.clicked.connect(self.deleteRecord)
-        #shortcut for delete button
         self.deleteButton.setShortcut("Delete")
-
-        # self.deleteButton.setIcon(QtGui.QIcon('3669361_delete_ic_icon.png'))
-        # self.deleteButton.setIconSize(QtCore.QSize(20,20 ))
-
         self.openFileButton.clicked.connect(self.openFile)
-        #self.openFileButton.setIcon(QtGui.QIcon('5925643_file_folder_open_icon.png'))
-        # self.openFileButton.setIconSize(QtCore.QSize(20,20 ))
-        self.ResetButton.clicked.connect(self.reset)
-        #self.databaseButton.clicked.connect(self.insertDatabase)
+        self.ResetButton.clicked.connect(self.reset)       
         self.closeButton.clicked.connect(self.closeGUI)
-        # self.closeButton.setIcon(QtGui.QIcon('4781839_cancel_circle_close_delete_discard_icon.png'))
-        # self.closeButton.setIconSize(QtCore.QSize(20,20 ))
         self.saveButton.clicked.connect(self.updateDataView)
-        #connect tool button to search function
-        #set icon for search button
         self.SearchToolButton.setIcon(QtGui.QIcon('magnifying-glass.png'))
         self.SearchToolButton.setIconSize(QtCore.QSize(20,20 ))
         self.SearchToolButton.clicked.connect(self.findName)
         self.SearchToolButton.setShortcut("Enter")
         self.DataTableWidget.doubleClicked.connect(self.openFile)
-
-
-        #set icon for back button
-        # self.BacktoolButton.setIcon(QtGui.QIcon('left-arrow.png'))
-        # self.BacktoolButton.setIconSize(QtCore.QSize(20,20 ))
         self.BacktoolButton.clicked.connect(self.back)
-
         self.datasetTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.colTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.commentTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.urlTextEdit.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.EnergyComboList.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
-        #self.databaseComboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.locationLabel.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.colNameslist.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
-
         self.EnergycomboBox.setStyleSheet("border: 1px solid ;" "background-color: #FFFFFF;" )
         self.datasetTextEdit.setPlaceholderText("Enter your Dataset Name")
         self.autocompletion()
-
-        self.show()
-
         global clickedInsertButton
         global clickedSaveButton
         global clickedSearchToolButton
         global clickedBacktoolButton
-
         clickedInsertButton = False
         clickedSaveButton = False
         clickedSearchToolButton = False
         clickedBacktoolButton = False
-
-        
+        self.show()
 
     def back(self):
 
@@ -166,18 +117,14 @@ class UI(QtWidgets.QDialog):
         
     def findName(self):
         #search matching name in database
-
-
         searchName = self.searchbar.text()
         if searchName != "":
             #self.searchbar.setText("")
-            query = ("Select *   from TempData where nameOfDatabase Like ? or energyType like ? or fileType like? ")
+            query = ("SELECT nameOfDatabase, energyType, FileType, comments, CreatedDate, location FROM TempData where nameOfDatabase Like ? or energyType like ? or fileType like? ")
             results = cursor.execute(query,('%'+searchName+'%','%'+searchName+'%','%'+searchName+'%'))
             results = cursor.fetchall()
-
             if results == []:
                 message = QtWidgets.QMessageBox.information(self, "Information", "No matching record found")
-                #
             else:
                 clickedSearchToolButton = True
                 for i in reversed(range(self.DataTableWidget.rowCount())):
@@ -187,9 +134,8 @@ class UI(QtWidgets.QDialog):
                     row_number = self.DataTableWidget.rowCount()
                     self.DataTableWidget.insertRow(row_number)
                     for column_number, data in enumerate(row_data):
-                        self.DataTableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
-        
-            
+                        self.DataTableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))     
+
     def autocompletion(self):
         cursor.execute("SELECT nameOfDatabase, energyType, FileType FROM TempData")
         data = cursor.fetchall()
@@ -197,15 +143,10 @@ class UI(QtWidgets.QDialog):
         for rowdata in data:
             completionList.extend(iter(rowdata))
             #to remove duplicates
-        #print(list(dict.fromkeys(completionList)))
         self.completer = QCompleter(list(dict.fromkeys(completionList)))
-        #set completer for any character
         self.completer.setCompletionMode(QCompleter.PopupCompletion)
-        
         self.completer.setCaseSensitivity(Qt.CaseInsensitive)
         self.searchbar.setCompleter(self.completer)
-
-            
 
     def buttonStatusChanged(self):
         if self.DataTableWidget.rowCount() > 0:
@@ -222,17 +163,13 @@ class UI(QtWidgets.QDialog):
     def displayData(self):
 
         cursor.execute("SELECT nameOfDatabase, energyType, FileType, comments, CreatedDate, location FROM TempData")      
-        data = cursor.fetchall()
-        
-        
+        data = cursor.fetchall()       
         for row_number, row_data in enumerate(data):
             self.DataTableWidget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
                 self.DataTableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
     
     def closeGUI(self):
-
-
         if self.DataTableWidget.rowCount() > 0:
             if clickedSaveButton == True:
                 reply = QtWidgets.QMessageBox.question(self, 'Message', "Do you want to save the data?", QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Cancel, QtWidgets.QMessageBox.Cancel)
@@ -244,39 +181,30 @@ class UI(QtWidgets.QDialog):
             else:
                     self.close()
 
-
     def openFile(self):
         selectedRow = self.DataTableWidget.currentRow()
         path = self.DataTableWidget.item(selectedRow, 5).text()
         pyquark.filestart(path)
         self.buttonStatusChanged()
 
-        # print(selectedPath)
-        # os.startfile(selectedPath)
-
     def deleteRecord(self):
-            selectedRow = self.DataTableWidget.currentRow()
-            
+            selectedRow = self.DataTableWidget.currentRow()           
             message = QtWidgets.QMessageBox()
             message.setWindowTitle("Delete")
             message = QtWidgets.QMessageBox.question(
                    self, "Delete", "Are you sure you want to delete?", QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-            if message == QtWidgets.QMessageBox.Yes:
-                    
-                    nameOfDatabase = self.DataTableWidget.item(selectedRow, 0).text()
-                   
+            if message == QtWidgets.QMessageBox.Yes:                   
+                    nameOfDatabase = self.DataTableWidget.item(selectedRow, 0).text()                  
                     cursor.execute("DROP TABLE IF EXISTS" +' ' + nameOfDatabase)
                     #delete row from database
                     cursor.execute("DELETE FROM TempData WHERE nameOfDatabase = ?", (nameOfDatabase,))
                     connection.commit()
                     self.DataTableWidget.removeRow(selectedRow)
-
             self.buttonStatusChanged()
             self.autocompletion()
 
-    def insertFile(self):  # sourcery skip: use-named-expression
+    def insertFile(self): 
         clickedInsertButton = True
-        #self.updateButton.setDisabled(False)
         global fname
         fname = QFileDialog.getOpenFileName(self, "Choose CSV", "","(*.csv);;(*.json);;(*.xlsm);;(*.xlsx)")
         if fname[0] != '':
@@ -290,9 +218,7 @@ class UI(QtWidgets.QDialog):
             df = pd.read_csv(fname[0], encoding= 'unicode_escape')
             for item in df.columns.values.tolist():
                  self.colNameslist.addItem(item)
-            self.colTextEdit.setPlainText(str(self.colNameslist.count()))
- 
-            
+            self.colTextEdit.setPlainText(str(self.colNameslist.count()))            
         else:
             self.locationLabel.setText("No file selected")
             self.datasetTextEdit.setPlainText("")
@@ -301,17 +227,6 @@ class UI(QtWidgets.QDialog):
             self.buttonStatusChanged()
 
         self.show()
-    
-  
-    # def insertDatabase(self):
-    #     clickeddatabaseButton = True
-    #     dataBasename = QFileDialog.getOpenFileName(self, "Choose Database File", "","(*.db)")
-    #     if os.path.basename(dataBasename[0]) not in addedDatabases:
-    #         addedDatabases.append(os.path.basename(dataBasename[0]))
-    #         self.databaseComboBox.addItem(os.path.basename(dataBasename[0]))
-    #     self.databaseComboBox.setCurrentText(os.path.basename(dataBasename[0]))
-    #     self.buttonStatusChanged()
-        
         
     def reset(self):
         
@@ -327,14 +242,12 @@ class UI(QtWidgets.QDialog):
                 self.commentTextEdit.clear()
                 self.colNameslist.clear()
                 self.colTextEdit.clear()
-                #self.databaseComboBox.clear()
             self.buttonStatusChanged()
         else:
             message = QtWidgets.QMessageBox()
             message.setWindowTitle("Reset")
             message = QtWidgets.QMessageBox.information(self, "Reset", "No data inseted", QtWidgets.QMessageBox.Ok)
-        
-        
+               
     def updateDataView(self):
 
         validationValue =validators.url(self.urlTextEdit.toPlainText())
@@ -343,8 +256,7 @@ class UI(QtWidgets.QDialog):
         elif validationValue != True:
             message = QtWidgets.QMessageBox.warning(self, "Warning", "Invalid URL") 
         elif self.commentTextEdit.toPlainText() == "":
-            message = QtWidgets.QMessageBox.warning(self, "Warning", "Please write a comment")
-         
+            message = QtWidgets.QMessageBox.warning(self, "Warning", "Please write a comment")      
         else:                                     
             self.loaddata()
             self.locationLabel.clear()
@@ -363,19 +275,16 @@ class UI(QtWidgets.QDialog):
         message.setWindowTitle("Warning")
         message = QtWidgets.QMessageBox.question(
                 self, "Edit", "Are you sure you want to edit?", QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-        if message == QtWidgets.QMessageBox.Yes:
-            
+        if message == QtWidgets.QMessageBox.Yes:           
             self.datasetTextEdit.setPlainText(self.DataTableWidget.item(selectedRow, 0).text())
             self.EnergycomboBox.setCurrentText(self.DataTableWidget.item(selectedRow, 1).text())
             self.EnergyComboList.setCurrentText(self.DataTableWidget.item(selectedRow, 2).text())
             self.commentTextEdit.setPlainText(self.DataTableWidget.item(selectedRow, 3).text())
             self.locationLabel.setText(self.DataTableWidget.item(selectedRow, 5).text())
-
             #grab a url from the database
             cursor.execute("SELECT url FROM TempData WHERE nameOfDatabase = ?", (self.DataTableWidget.item(selectedRow, 0).text(),))
             url = cursor.fetchone()
             self.urlTextEdit.setPlainText(url[0])
-
             #convert path to dataframe and display column names
             df = pd.read_csv(self.DataTableWidget.item(selectedRow, 5).text(), encoding= 'unicode_escape')
             for item in df.columns.values.tolist():
@@ -383,10 +292,8 @@ class UI(QtWidgets.QDialog):
             self.colTextEdit.setPlainText(str(self.colNameslist.count()))
             cursor.execute("DROP TABLE IF EXISTS" +' ' + self.DataTableWidget.item(selectedRow, 0).text())
             cursor.execute("DELETE FROM TempData WHERE nameOfDatabase = ?", (self.DataTableWidget.item(selectedRow, 0).text(),))
-            connection.commit()
-            
+            connection.commit()            
             self.DataTableWidget.removeRow(selectedRow)
-
         self.buttonStatusChanged()
         self.autocompletion()
 
@@ -402,10 +309,7 @@ class UI(QtWidgets.QDialog):
                     }
         self.DataTableWidget.insertRow(0)
         for column, value in enumerate(Data.values()):
-            self.DataTableWidget.setItem(0, column, QtWidgets.QTableWidgetItem(str(value)))
-
- 
-        
+            self.DataTableWidget.setItem(0, column, QtWidgets.QTableWidgetItem(str(value)))        
         cursor.execute("CREATE TABLE IF NOT EXISTS TempData (nameOfDatabase TEXT, energyType TEXT, fileType TEXT, comments TEXT, location TEXT, url TEXT, createdDate TEXT, noColumns TEXT)")
         cursor.execute("INSERT INTO TempData VALUES(?, ?, ?, ?, ?, ?, ?, ?)", (self.datasetTextEdit.toPlainText(), 
                                                                                 self.EnergycomboBox.currentText(), 
@@ -416,7 +320,6 @@ class UI(QtWidgets.QDialog):
                                                                                 datetime.fromtimestamp(now).strftime('%Y-%m-%d %H:%M:%S'), 
                                                                                 self.colTextEdit.toPlainText()))
         connection.commit()
-
         users = pd.read_csv(self.locationLabel.text(), encoding= 'unicode_escape')
         users.to_sql(self.datasetTextEdit.toPlainText(), connection, if_exists='replace', index=False)
 
